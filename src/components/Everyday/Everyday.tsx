@@ -12,6 +12,8 @@ export const Everyday = ({ occasion }: EverydayProps) => {
     <>
       <GroupTitle title="Everyday" />
 
+      <AddItemForm />
+
       {Object.entries(seasons).map(([season, items]) => {
         if (!items.length) return null;
 

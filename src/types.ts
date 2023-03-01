@@ -1,15 +1,16 @@
 export enum Type {
-    Head = 'head',
-    Top = 'top',
-    Bottom = 'bottom',
-    Shoes = 'shoes',
-    Underwear = 'underwear',
+    Head = 'Head',
+    Top = 'Top',
+    Bottom = 'Bottom',
+    Shoes = 'Shoes',
+    Underwear = 'Underwear',
+    Accessories = 'Accessories',
 }
 
 export enum Season {
-    Summer = 'summer',
-    DemiSeason = 'demi-season',
-    Winter = 'winter',
+    Summer = 'Summer',
+    DemiSeason = 'Demi-season',
+    Winter = 'Winter',
 }
 
 export interface Occasion {
