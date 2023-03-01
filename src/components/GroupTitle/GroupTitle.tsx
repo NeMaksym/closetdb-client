@@ -9,7 +9,7 @@ export const GroupTitle = ({ title }: GroupTitleProps) => {
   return (
     <List>
       <ListItem
-        disablePadding
+        sx={{ pl: 0 }}
         secondaryAction={
           <IconButton edge="end" aria-label="add">
             <AddIcon />
