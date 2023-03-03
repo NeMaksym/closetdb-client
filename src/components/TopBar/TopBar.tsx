@@ -10,7 +10,7 @@ export const TopBar = () => {
           Closet
         </Typography>
         <Button color="inherit">FAQ</Button>
-        <Button color="inherit">Example</Button>
+        <Button color="inherit">Demo</Button>
       </Toolbar>
     </AppBar>
   );
