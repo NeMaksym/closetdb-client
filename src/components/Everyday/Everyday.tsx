@@ -1,3 +1,4 @@
+import AddIcon from "@mui/icons-material/Add";
 import { GroupTitle, AddItemForm } from "..";
 import { Item, Occasion, Season } from "../../types";
 
@@ -8,9 +9,19 @@ interface EverydayProps {
 export const Everyday = ({ occasion }: EverydayProps) => {
   const seasons = groupBySeason(occasion.items);
 
+  const menuConfig = [
+    {
+      label: "Add item",
+      icon: <AddIcon />,
+      onClick: () => {
+        console.log("Add item");
+      }
+    }
+  ];
+
   return (
     <>
-      <GroupTitle title="Everyday" />
+      <GroupTitle title="Everyday" menuConfig={menuConfig} />
 
       <AddItemForm />
 
