@@ -26,6 +26,10 @@ export const Occastions = ({ occasions }: OccasionsProps) => {
       label: "Add occasion",
       icon: <PlaylistAddIcon />,
       onClick: () => {
+        if (openAddItemForm) {
+          setOpenAddItemForm(false);
+        }
+
         setOpenAddOccasionForm(!openAddOccasionForm);
       }
     },
@@ -33,6 +37,10 @@ export const Occastions = ({ occasions }: OccasionsProps) => {
       label: "Add item",
       icon: <AddIcon />,
       onClick: () => {
+        if (openAddOccasionForm) {
+          setOpenAddOccasionForm(false);
+        }
+
         setOpenAddItemForm(!openAddItemForm);
       }
     }
