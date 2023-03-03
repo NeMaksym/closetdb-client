@@ -1,8 +1,9 @@
 import { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
+import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 
 import { Occasion } from "../../types";
-import { GroupTitle, AddItemForm } from "..";
+import { GroupTitle, AddItemForm, AddOccasionForm } from "..";
 
 interface OccasionsProps {
   occasions: Occasion[];
@@ -10,12 +11,24 @@ interface OccasionsProps {
 
 export const Occastions = ({ occasions }: OccasionsProps) => {
   const [openAddItemForm, setOpenAddItemForm] = useState(false);
+  const [openAddOccasionForm, setOpenAddOccasionForm] = useState(false);
 
   const handleCloseAddItemForm = () => {
     setOpenAddItemForm(false);
   };
 
+  const handleCloseAddOccasionForm = () => {
+    setOpenAddOccasionForm(false);
+  };
+
   const menuConfig = [
+    {
+      label: "Add occasion",
+      icon: <PlaylistAddIcon />,
+      onClick: () => {
+        setOpenAddOccasionForm(!openAddOccasionForm);
+      }
+    },
     {
       label: "Add item",
       icon: <AddIcon />,
@@ -28,6 +41,11 @@ export const Occastions = ({ occasions }: OccasionsProps) => {
   return (
     <>
       <GroupTitle title="By occasion" menuConfig={menuConfig} />
+
+      <AddOccasionForm
+        open={openAddOccasionForm}
+        handleClose={handleCloseAddOccasionForm}
+      />
 
       <AddItemForm
         open={openAddItemForm}
