@@ -19,9 +19,10 @@ import { Type, Season } from "../../types";
 
 interface AddItemFormProps {
   formik: FormikProps<FormikValues>;
+  handleClose: () => void;
 }
 
-export const AddItemForm = ({ formik }: AddItemFormProps) => {
+export const AddItemForm = ({ formik, handleClose }: AddItemFormProps) => {
   return (
     <Paper elevation={1}>
       <Grid container spacing={2}>
@@ -42,7 +43,7 @@ export const AddItemForm = ({ formik }: AddItemFormProps) => {
         </Grid>
 
         {/* Type */}
-        <Grid xs={4}>
+        <Grid xs={6}>
           <FormControl
             fullWidth
             required
@@ -71,7 +72,7 @@ export const AddItemForm = ({ formik }: AddItemFormProps) => {
         </Grid>
 
         {/* Season */}
-        <Grid xs={8} justifyContent="center">
+        <Grid xs={6} justifyContent="center">
           <Stack direction="row" justifyContent="center">
             <FormControl
               required
@@ -183,7 +184,7 @@ export const AddItemForm = ({ formik }: AddItemFormProps) => {
             >
               Add Item
             </Button>
-            <Button variant="outlined" size="small">
+            <Button variant="outlined" size="small" onClick={handleClose}>
               Close
             </Button>
           </Stack>

@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { Collapse } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { GroupTitle, AddItemForm } from "..";
 import { Item, Occasion, Season } from "../../types";
@@ -9,12 +11,18 @@ interface EverydayProps {
 export const Everyday = ({ occasion }: EverydayProps) => {
   const seasons = groupBySeason(occasion.items);
 
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const menuConfig = [
     {
       label: "Add item",
       icon: <AddIcon />,
       onClick: () => {
-        console.log("Add item");
+        setOpen(!open);
       }
     }
   ];
@@ -23,7 +31,9 @@ export const Everyday = ({ occasion }: EverydayProps) => {
     <>
       <GroupTitle title="Everyday" menuConfig={menuConfig} />
 
-      <AddItemForm />
+      <Collapse in={open} unmountOnExit>
+        <AddItemForm handleClose={handleClose} />
+      </Collapse>
 
       {Object.entries(seasons).map(([season, items]) => {
         if (!items.length) return null;

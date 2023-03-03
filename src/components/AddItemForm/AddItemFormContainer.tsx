@@ -25,7 +25,13 @@ export interface FormikValues {
   startDate: Date | null;
 }
 
-export const AddItemFormContainer = () => {
+interface AddItemFormContainerProps {
+  handleClose: () => void;
+}
+
+export const AddItemFormContainer = ({
+  ...props
+}: AddItemFormContainerProps) => {
   const formik = useFormik<FormikValues>({
     initialValues: {
       name: "",
@@ -41,5 +47,5 @@ export const AddItemFormContainer = () => {
     }
   });
 
-  return <AddItemForm formik={formik} />;
+  return <AddItemForm formik={formik} {...props} />;
 };
