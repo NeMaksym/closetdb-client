@@ -1,21 +1,15 @@
 import { useState } from "react";
-import AddIcon from "@mui/icons-material/Add";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 
 import { Occasion } from "../../types";
-import { GroupTitle, AddItemForm, AddOccasionForm } from "..";
+import { GroupTitle, AddOccasionForm } from "..";
 
 interface OccasionsProps {
   occasions: Occasion[];
 }
 
 export const Occastions = ({ occasions }: OccasionsProps) => {
-  const [openAddItemForm, setOpenAddItemForm] = useState(false);
   const [openAddOccasionForm, setOpenAddOccasionForm] = useState(false);
-
-  const handleCloseAddItemForm = () => {
-    setOpenAddItemForm(false);
-  };
 
   const handleCloseAddOccasionForm = () => {
     setOpenAddOccasionForm(false);
@@ -26,22 +20,7 @@ export const Occastions = ({ occasions }: OccasionsProps) => {
       label: "Add occasion",
       icon: <PlaylistAddIcon />,
       onClick: () => {
-        if (openAddItemForm) {
-          setOpenAddItemForm(false);
-        }
-
         setOpenAddOccasionForm(!openAddOccasionForm);
-      }
-    },
-    {
-      label: "Add item",
-      icon: <AddIcon />,
-      onClick: () => {
-        if (openAddOccasionForm) {
-          setOpenAddOccasionForm(false);
-        }
-
-        setOpenAddItemForm(!openAddItemForm);
       }
     }
   ];
@@ -53,11 +32,6 @@ export const Occastions = ({ occasions }: OccasionsProps) => {
       <AddOccasionForm
         open={openAddOccasionForm}
         handleClose={handleCloseAddOccasionForm}
-      />
-
-      <AddItemForm
-        open={openAddItemForm}
-        handleClose={handleCloseAddItemForm}
       />
 
       {occasions.map((occasion) => {

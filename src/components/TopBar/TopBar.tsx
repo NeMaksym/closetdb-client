@@ -1,14 +1,29 @@
-import { AppBar, Toolbar, Typography, Button } from "@mui/material";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  IconButton,
+  Box
+} from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 import CheckroomIcon from "@mui/icons-material/Checkroom";
 
-export const TopBar = () => {
+interface TopBarProps {
+  handleAddItem: () => void;
+}
+
+export const TopBar = ({ handleAddItem }: TopBarProps) => {
   return (
     <AppBar position="static">
       <Toolbar>
         <CheckroomIcon sx={{ mr: 1 }} />
-        <Typography variant="h5" sx={{ flexGrow: 1 }}>
-          Closet
-        </Typography>
+        <Typography variant="h5">Closet</Typography>
+        <Box sx={{ ml: "auto", mr: "auto" }}>
+          <IconButton color="inherit">
+            <AddIcon onClick={handleAddItem} />
+          </IconButton>
+        </Box>
         <Button color="inherit">FAQ</Button>
         <Button color="inherit">Demo</Button>
       </Toolbar>

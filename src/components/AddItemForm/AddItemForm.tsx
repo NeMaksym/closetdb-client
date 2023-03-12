@@ -24,10 +24,14 @@ interface AddItemFormProps {
   handleClose: () => void;
 }
 
-export const AddItemForm = ({ formik, open, handleClose }: AddItemFormProps) => {
+export const AddItemForm = ({
+  formik,
+  open,
+  handleClose
+}: AddItemFormProps) => {
   return (
     <Collapse in={open} unmountOnExit>
-      <Paper elevation={1}>
+      <Paper elevation={2} sx={{ p: 2 }}>
         <Grid container spacing={2}>
           {/* Name */}
           <Grid xs={12}>
