@@ -7,8 +7,8 @@ import {
   Box
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import CheckroomIcon from "@mui/icons-material/Checkroom";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
+import logo from "../../icons/logo.png";
 
 interface TopBarProps {
   handleAddItem: () => void;
@@ -19,8 +19,23 @@ export const TopBar = ({ handleAddItem, handleAddOccasion }: TopBarProps) => {
   return (
     <AppBar position="static">
       <Toolbar>
-        <CheckroomIcon sx={{ mr: 1 }} />
-        <Typography variant="h5">Closet</Typography>
+        <img
+          src={logo}
+          alt="logo"
+          width={32}
+          height={32}
+          style={{ marginRight: "16px" }}
+        />
+        <Typography
+          variant="h5"
+          sx={{
+            fontFamily: '"NatureBeauty", sans-serif',
+            position: "relative",
+            top: "4px"
+          }}
+        >
+          Closet DB
+        </Typography>
         <Box sx={{ ml: "auto", mr: "auto" }}>
           <IconButton color="inherit">
             <AddIcon onClick={handleAddItem} />

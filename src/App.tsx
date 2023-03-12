@@ -2,6 +2,7 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Grid from "@mui/material/Unstable_Grid2";
 import { Box, Stack, Collapse } from "@mui/material";
+import "./App.css";
 import {
   TopBar,
   Occastions,
