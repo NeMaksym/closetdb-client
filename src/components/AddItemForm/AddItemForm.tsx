@@ -15,17 +15,54 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { DatePicker } from "@mui/x-date-pickers";
 import { FormikProps } from "formik";
 import { FormikValues } from "./AddItemFormContainer";
-import { Type, Season } from "../../types";
+import { Type, Season, Occasion } from "../../types";
 
 interface AddItemFormProps {
   formik: FormikProps<FormikValues>;
+  occasions: Occasion[];
   handleClose: () => void;
 }
 
-export const AddItemForm = ({ formik, handleClose }: AddItemFormProps) => {
+export const AddItemForm = ({
+  formik,
+  occasions,
+  handleClose
+}: AddItemFormProps) => {
+  const isEverydayOccasion = occasions.find(
+    ({ id }) => id === formik.values.occasion
+  )?.isEveryday;
+
   return (
     <Paper elevation={2} sx={{ p: 2 }}>
       <Grid container spacing={2}>
+        <Grid xs={12}>
+          <FormControl
+            fullWidth
+            required
+            error={formik.touched.occasion && Boolean(formik.errors.occasion)}
+          >
+            <InputLabel id="occasion">Occasion</InputLabel>
+            <Select
+              size="small"
+              labelId="occasion"
+              id="occasion"
+              name="occasion"
+              label="Occasion"
+              value={formik.values.occasion}
+              onChange={formik.handleChange}
+            >
+              {occasions.map((occasion) => (
+                <MenuItem key={occasion.id} value={occasion.id}>
+                  {occasion.title}
+                </MenuItem>
+              ))}
+            </Select>
+            <FormHelperText>
+              {formik.touched.occasion && formik.errors.occasion}
+            </FormHelperText>
+          </FormControl>
+        </Grid>
+
         {/* Name */}
         <Grid xs={12}>
           <TextField
@@ -43,7 +80,7 @@ export const AddItemForm = ({ formik, handleClose }: AddItemFormProps) => {
         </Grid>
 
         {/* Type */}
-        <Grid xs={6}>
+        <Grid xs={isEverydayOccasion ? 6 : 12}>
           <FormControl
             fullWidth
             required
@@ -72,52 +109,54 @@ export const AddItemForm = ({ formik, handleClose }: AddItemFormProps) => {
         </Grid>
 
         {/* Season */}
-        <Grid xs={6} justifyContent="center">
-          <Stack direction="row" justifyContent="center">
-            <FormControl
-              required
-              error={formik.touched.season && Boolean(formik.errors.season)}
-            >
-              <InputLabel id="season" shrink>
-                Season
-              </InputLabel>
-              <ButtonGroup
-                aria-label="season picker"
-                size="small"
-                sx={{ mt: 1 }}
+        {isEverydayOccasion && (
+          <Grid xs={6} justifyContent="center">
+            <Stack direction="row" justifyContent="center">
+              <FormControl
+                required
+                error={formik.touched.season && Boolean(formik.errors.season)}
               >
-                {Object.values(Season).map((season) => {
-                  const isSelected = formik.values.season.includes(season);
+                <InputLabel id="season" shrink>
+                  Season
+                </InputLabel>
+                <ButtonGroup
+                  aria-label="season picker"
+                  size="small"
+                  sx={{ mt: 1 }}
+                >
+                  {Object.values(Season).map((season) => {
+                    const isSelected = formik.values.season.includes(season);
 
-                  return (
-                    <Button
-                      key={season}
-                      variant={isSelected ? "contained" : "outlined"}
-                      onClick={() => {
-                        if (isSelected) {
-                          formik.setFieldValue(
-                            "season",
-                            formik.values.season.filter((s) => s !== season)
-                          );
-                        } else {
-                          formik.setFieldValue("season", [
-                            ...formik.values.season,
-                            season
-                          ]);
-                        }
-                      }}
-                    >
-                      {season}
-                    </Button>
-                  );
-                })}
-              </ButtonGroup>
-              <FormHelperText>
-                {formik.touched.season && formik.errors.season}
-              </FormHelperText>
-            </FormControl>
-          </Stack>
-        </Grid>
+                    return (
+                      <Button
+                        key={season}
+                        variant={isSelected ? "contained" : "outlined"}
+                        onClick={() => {
+                          if (isSelected) {
+                            formik.setFieldValue(
+                              "season",
+                              formik.values.season.filter((s) => s !== season)
+                            );
+                          } else {
+                            formik.setFieldValue("season", [
+                              ...formik.values.season,
+                              season
+                            ]);
+                          }
+                        }}
+                      >
+                        {season}
+                      </Button>
+                    );
+                  })}
+                </ButtonGroup>
+                <FormHelperText>
+                  {formik.touched.season && formik.errors.season}
+                </FormHelperText>
+              </FormControl>
+            </Stack>
+          </Grid>
+        )}
 
         {/* Brand */}
         <Grid xs={6}>

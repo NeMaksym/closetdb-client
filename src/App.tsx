@@ -8,7 +8,7 @@ import {
   AddItemForm,
   AddOccasionForm
 } from "./components";
-import { occasions, everydayOccasion } from "./types";
+import { occasions } from "./types";
 
 function App() {
   const [openAddItemForm, setOpenAddItemForm] = useState(false);
@@ -56,7 +56,7 @@ function App() {
               <Occastions occasions={occasions} />
             </Grid>
             <Grid xs={6}>
-              <Everyday occasion={everydayOccasion} />
+              <Everyday occasions={occasions} />
             </Grid>
           </Grid>
         </Box>

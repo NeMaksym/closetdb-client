@@ -2,15 +2,20 @@ import { GroupTitle } from "..";
 import { Item, Occasion, Season } from "../../types";
 
 interface EverydayProps {
-  occasion: Occasion;
+  occasions: Occasion[];
 }
 
-export const Everyday = ({ occasion }: EverydayProps) => {
-  const seasons = groupBySeason(occasion.items);
+export const Everyday = ({ occasions }: EverydayProps) => {
+  const everydayOccasion = occasions.find((occasion) => occasion.isEveryday);
+
+  // TODO: Implement error handling
+  if (!everydayOccasion) return null;
+
+  const seasons = groupBySeason(everydayOccasion.items);
 
   return (
     <>
-      <GroupTitle title="Everyday" />
+      <GroupTitle title={everydayOccasion.title} />
 
       {Object.entries(seasons).map(([season, items]) => {
         if (!items.length) return null;

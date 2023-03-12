@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 export enum Type {
     Head = 'Head',
     Top = 'Top',
@@ -18,6 +20,7 @@ export interface Occasion {
     title: string
     order: number
     items: Item[]
+    isEveryday: boolean
 }
 
 export interface Item {
@@ -65,22 +68,24 @@ const items: Item[] = [
   
 export const occasions: Occasion[] = [
     {
-      id: '1',
-      title: "Birthday",
-      items,
-      order: 1,
+        id: uuidv4(),
+        title: "Everyday",
+        items,
+        order: 0,
+        isEveryday: true,
     },
     {
-        id: '2',
+        id: uuidv4(),
+        title: "Birthday",
+        items,
+        order: 1,
+        isEveryday: false,
+    },
+    {
+        id: uuidv4(),
         title: "Wedding",
         items,
         order: 2,
+        isEveryday: false,
     },
 ]
-
-export const everydayOccasion: Occasion = {
-    id: '3',
-    title: "Everyday",
-    items,
-    order: 0,
-}
