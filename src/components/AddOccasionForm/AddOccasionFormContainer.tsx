@@ -11,7 +11,6 @@ export interface FormikValues {
 }
 
 interface AddItemFormContainerProps {
-  open: boolean;
   handleClose: () => void;
 }
 

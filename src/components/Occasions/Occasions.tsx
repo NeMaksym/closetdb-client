@@ -1,38 +1,14 @@
-import { useState } from "react";
-import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
-
+import { GroupTitle } from "..";
 import { Occasion } from "../../types";
-import { GroupTitle, AddOccasionForm } from "..";
 
 interface OccasionsProps {
   occasions: Occasion[];
 }
 
 export const Occastions = ({ occasions }: OccasionsProps) => {
-  const [openAddOccasionForm, setOpenAddOccasionForm] = useState(false);
-
-  const handleCloseAddOccasionForm = () => {
-    setOpenAddOccasionForm(false);
-  };
-
-  const menuConfig = [
-    {
-      label: "Add occasion",
-      icon: <PlaylistAddIcon />,
-      onClick: () => {
-        setOpenAddOccasionForm(!openAddOccasionForm);
-      }
-    }
-  ];
-
   return (
     <>
-      <GroupTitle title="By occasion" menuConfig={menuConfig} />
-
-      <AddOccasionForm
-        open={openAddOccasionForm}
-        handleClose={handleCloseAddOccasionForm}
-      />
+      <GroupTitle title="By occasion" />
 
       {occasions.map((occasion) => {
         const { id, title, items } = occasion;

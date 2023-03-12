@@ -1,3 +1,4 @@
+import { GroupTitle } from "..";
 import { Item, Occasion, Season } from "../../types";
 
 interface EverydayProps {
@@ -9,7 +10,7 @@ export const Everyday = ({ occasion }: EverydayProps) => {
 
   return (
     <>
-      <h4>Everyday</h4>
+      <GroupTitle title="Everyday" />
 
       {Object.entries(seasons).map(([season, items]) => {
         if (!items.length) return null;
