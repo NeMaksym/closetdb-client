@@ -1,11 +1,11 @@
+import { useContext } from "react";
 import { GroupTitle } from "..";
-import { Occasion } from "../../types";
+import { OccasionsContext } from "../../utils";
 
-interface OccasionsProps {
-  occasions: Occasion[];
-}
+// TODO: Handle empty list
+export const Occastions = () => {
+  const { occasions } = useContext(OccasionsContext);
 
-export const Occastions = ({ occasions }: OccasionsProps) => {
   return (
     <>
       <GroupTitle title="By occasion" />

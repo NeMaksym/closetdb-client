@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import Grid from "@mui/material/Unstable_Grid2";
 import { Box, Stack, Collapse } from "@mui/material";
 import {
@@ -8,9 +9,25 @@ import {
   AddItemForm,
   AddOccasionForm
 } from "./components";
-import { occasions } from "./types";
+import { Occasion } from "./types";
+import { useLocalStorage, OccasionsContext } from "./utils";
+
+const DEFAULT_OCCASIONS: Occasion[] = [
+  {
+    id: uuidv4(),
+    title: "Everyday",
+    isEveryday: true,
+    items: [],
+    order: 0
+  }
+];
 
 function App() {
+  const [occasions, setOccasions] = useLocalStorage<Occasion[]>(
+    "occasions",
+    DEFAULT_OCCASIONS
+  );
+
   const [openAddItemForm, setOpenAddItemForm] = useState(false);
   const [openAddOccasionForm, setOpenAddOccasionForm] = useState(false);
 
@@ -23,7 +40,7 @@ function App() {
   };
 
   return (
-    <>
+    <OccasionsContext.Provider value={{ occasions, setOccasions }}>
       <Stack spacing={4}>
         <TopBar
           handleAddItem={() => setOpenAddItemForm(!openAddItemForm)}
@@ -53,15 +70,15 @@ function App() {
         <Box pl={4} pr={4}>
           <Grid container spacing={2}>
             <Grid xs={6}>
-              <Occastions occasions={occasions} />
+              <Occastions />
             </Grid>
             <Grid xs={6}>
-              <Everyday occasions={occasions} />
+              <Everyday />
             </Grid>
           </Grid>
         </Box>
       </Stack>
-    </>
+    </OccasionsContext.Provider>
   );
 }
 

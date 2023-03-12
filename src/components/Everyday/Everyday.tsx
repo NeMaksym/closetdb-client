@@ -1,11 +1,12 @@
+import { useContext } from "react";
 import { GroupTitle } from "..";
-import { Item, Occasion, Season } from "../../types";
+import { Item, Season } from "../../types";
+import { OccasionsContext } from "../../utils";
 
-interface EverydayProps {
-  occasions: Occasion[];
-}
+// TODO: Handle empty list
+export const Everyday = () => {
+  const { occasions } = useContext(OccasionsContext);
 
-export const Everyday = ({ occasions }: EverydayProps) => {
   const everydayOccasion = occasions.find((occasion) => occasion.isEveryday);
 
   // TODO: Implement error handling
